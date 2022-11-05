@@ -12,4 +12,3 @@ access_token = config['twitter']['access_token']
 access_token_secret = config['twitter']['access_token_secret']
 
 #authentication
-auth = tweepy
