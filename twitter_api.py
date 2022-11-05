@@ -1,4 +1,6 @@
 import configparser
+import tweepy
+
 
 # read configs
 config = configparser.ConfigParser()
@@ -9,5 +11,5 @@ api_key_secret = config['twitter']['api_key_secret']
 access_token = config['twitter']['access_token']
 access_token_secret = config['twitter']['access_token_secret']
 
-print(access_token_secret)
-print(api_key)
+#authentication
+auth = tweepy
