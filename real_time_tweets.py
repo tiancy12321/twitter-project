@@ -14,13 +14,14 @@ access_token_secret = config['twitter']['access_token_secret']
 #authentication
 auth = tweepy.OAuthHandler(api_key, api_key_secret)
 auth.set_access_token(access_token, access_token_secret)
-
+auth.secure = True
 api = tweepy.API(auth)
+
 
 class Linstener(tweepy.Stream):
 
     tweets = []
-    limit = 100
+    limit = 1
 
     def on_status(self, status):
         self.tweets.append(status)
@@ -33,9 +34,17 @@ class Linstener(tweepy.Stream):
 stream_tweet = Linstener(api_key, api_key_secret, access_token, access_token_secret)
         
 #stream by keywords
-keywords = ['2022', '#python']
-stream_tweet.filter(track=keywords)
+# keywords = ['2022', '#python']
+# stream_tweet.filter(track=keywords)
 
+#stream by users
+users = ['elonmusk','KingJames']
+user_ids = []
+
+for user in users:
+    user_ids.append(api.get_user(screen_name = user).id)
+
+stream_tweet.filter(follow = user_ids)
 #create DataFrame
 columns = ['User', 'Tweet']
 data = []
